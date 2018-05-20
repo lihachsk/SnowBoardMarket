@@ -3,6 +3,6 @@
     ViewData["Title"] = "Index";
 }
 
-<div id="root"></div>
+<div id="root" asp-prerender-module="src/dist/main-server"></div>
 
-<script src="~/dist/main.js"></script>
+<script src="~/dist/main.js" asp-append-version="true"></script>

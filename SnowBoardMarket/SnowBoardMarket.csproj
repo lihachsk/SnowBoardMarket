@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -7,9 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\boot-client.tsx" />
-    <None Remove="ClientApp\containers\App.tsx" />
-    <None Remove="ClientApp\containers\Menu.tsx" />
+    <Content Include="src\node_modules\css\main.css" />
+    <Content Include="src\node_modules\css\menu.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,14 +17,45 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\node_modules\configureStore.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\boot-client.tsx" />
-    <TypeScriptCompile Include="ClientApp\containers\App.tsx" />
-    <TypeScriptCompile Include="ClientApp\containers\Menu.tsx" />
+    <TypeScriptCompile Include="src\node_modules\actions\index.ts" />
+    <TypeScriptCompile Include="src\node_modules\actionTypes.ts" />
+    <TypeScriptCompile Include="src\node_modules\api\index.ts" />
+    <TypeScriptCompile Include="src\node_modules\api\mockCategories.ts" />
+    <TypeScriptCompile Include="src\node_modules\api\mockSnowboards.ts" />
+    <TypeScriptCompile Include="src\node_modules\components\basketCard.tsx" />
+    <TypeScriptCompile Include="src\node_modules\components\categories.tsx" />
+    <TypeScriptCompile Include="src\node_modules\components\search.tsx" />
+    <TypeScriptCompile Include="src\node_modules\components\sidebar.tsx" />
+    <TypeScriptCompile Include="src\node_modules\consts\MenuLinks.ts" />
+    <TypeScriptCompile Include="src\node_modules\containers\About.tsx" />
+    <TypeScriptCompile Include="src\node_modules\containers\App.tsx" />
+    <TypeScriptCompile Include="src\node_modules\containers\AppPre.tsx" />
+    <TypeScriptCompile Include="src\node_modules\containers\Basket.tsx" />
+    <TypeScriptCompile Include="src\node_modules\containers\Layout.tsx" />
+    <TypeScriptCompile Include="src\node_modules\containers\Menu.tsx" />
+    <TypeScriptCompile Include="src\node_modules\containers\Snowboard.tsx" />
+    <TypeScriptCompile Include="src\node_modules\containers\Snowboards.tsx" />
+    <TypeScriptCompile Include="src\node_modules\css\main.css.d.ts" />
+    <TypeScriptCompile Include="src\node_modules\css\menu.css.d.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\basket.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\basketCard.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\categories.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\index.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\search.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\snowboardPage.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\snowboards.ts" />
+    <TypeScriptCompile Include="src\node_modules\reducers\snowboardsPage.ts" />
+    <TypeScriptCompile Include="src\node_modules\selectors.ts" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
