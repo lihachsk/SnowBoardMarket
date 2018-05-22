@@ -9,20 +9,28 @@ import Basket from 'containers/Basket';
 import configureStore from './node_modules/configureStore';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
-import { ApplicationState, combineAllReducers } from 'reducers';
+import { ApplicationState, reducers } from 'reducers';
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers, ReducersMapObject, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import appSettings from 'reducers/appSettings';
+import {
+    UPDATE_APPSETTINGS
+} from 'actionTypes';
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
+const initialState = (window as any).initialReduxState as ApplicationState;
 
-const store = createStore(combineAllReducers, composeWithDevTools(
-    applyMiddleware(
-        thunk,
-        middleware
-    )
+const store: Store<ApplicationState> = createStore<ApplicationState>(
+    combineReducers(reducers),
+    initialState,
+    composeWithDevTools(
+        applyMiddleware(
+            thunk,
+            middleware,
+        )
 ));
 
 const render = App => {

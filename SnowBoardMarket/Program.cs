@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -20,8 +21,15 @@ namespace SnowBoardMarket
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseApplicationInsights()
-                .UseKestrel()
-                .UseUrls("http://localhost:80")
+                .UseKestrel(options =>
+                {
+                    options.Listen(IPAddress.Loopback, 5000);  // http:localhost:5000
+                    options.Listen(IPAddress.Any, 80);         // http:*:80
+                    options.Listen(IPAddress.Loopback, 443, listenOptions =>
+                    {
+                        listenOptions.UseHttps("cert.pfx", "159753");
+                    });
+                })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

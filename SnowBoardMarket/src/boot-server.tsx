@@ -8,6 +8,9 @@ import { createMemoryHistory } from 'history';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 import configureStore from 'configureStore';
 import App from 'containers/App';
+import {
+    UPDATE_APPSETTINGS
+} from 'actionTypes';
 
 declare var window: any;
 
@@ -19,7 +22,10 @@ export default createServerRenderer(params => {
         const urlAfterBasename = params.url.substring(basename.length);
         const store = configureStore(createMemoryHistory());
         //store.dispatch(replace(urlAfterBasename));
-
+        store.dispatch({
+            type: UPDATE_APPSETTINGS,
+            payload: params.data
+        })
         // Prepare an instance of the application and perform an inital render that will
         // cause any async tasks (e.g., data access) to begin
         const routerContext: any = {};
@@ -29,12 +35,12 @@ export default createServerRenderer(params => {
                     context={routerContext}
                     location={params.url}
                 >
-                    <App />
+                    <App /> 
                 </StaticRouter>
             </Provider>
         );
         renderToString(app);
-
+        //{...{ AppSettings: params.data }} 
         // If there's a redirection, just send this information back to the host application
         if (routerContext.url) {
             resolve({ redirectUrl: routerContext.url });
