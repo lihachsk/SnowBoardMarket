@@ -1,12 +1,5 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
-
-<div id="root"
+﻿<html  id="root"
      asp-prerender-module="src/dist/main-server"
-     asp-prerender-data="new {
-                        domain = @Settings.Value.GetAppUri()
-                    }"></div>
-
+     asp-prerender-data="@Settings.Value">
+</html>
 <script src="~/dist/main.js" asp-append-version="true"></script>
